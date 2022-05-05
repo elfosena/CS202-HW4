@@ -28,7 +28,7 @@ LinkedList::Node* LinkedList::find(int index) const{
     return NULL;
 } 
 
-bool LinkedList::retrieve(int index, int dest, int dur) const {
+bool LinkedList::retrieve(int index, int& dest, int& dur) const {
     if ((index >= 1) && (index <= getLength())) {
         Node *cur = find(index);
         dest = cur->destination;
@@ -53,7 +53,8 @@ bool LinkedList::insert(int dest, int dur) {
 
     Node* cur = head;
     for (int index = 1; index < size; ++index) {
-        if (cur->destination > newPtr->destination) {
+        if (cur->destination > newPtr->destination || 
+            (cur->destination == newPtr->destination && cur->duration > newPtr->duration)) {
             if (index == 1) {
                 newPtr->next = head;
                 head = newPtr;

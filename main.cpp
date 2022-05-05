@@ -1,24 +1,54 @@
-#include "LinkedList.h"
+#include "Graph.h"
+#include <fstream>
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc <= 1) {
+        cout << "Error! You have to enter file name." << endl;
+    }
+    else {
+        string filename = argv[1];
+        ifstream infile;
+        infile.open((filename).c_str());
 
-    LinkedList list;
+        if (!infile) {
+            cout << "Error! Cannot open file." << endl;
+        }
+        else {
+            int airportcount;
+            int opcount;
+            char op;
 
-    list.display();
+            infile >> airportcount;
+            infile >> opcount;
+            Graph flightmap = Graph(airportcount);
 
-    cout << list.insert( 'A', 5) << endl;
-    cout << list.insert( 'Z', 3) << endl;
-    cout << list.insert( 'S', 3) << endl;
-    cout << list.insert( 'Z', 7) << endl;
-    cout << list.insert( 'M', 3) << endl;
+            for (int i = 0; i < opcount; i++) {
+                infile >> op;
 
-    cout << list.remove( 'A', 5) << endl;
-    cout << list.remove( 'Z', 3) << endl;
-    cout << list.remove( 'S', 3) << endl;
-    cout << list.remove( 'Z', 7) << endl;
-    cout << list.remove( 'M', 3) << endl;
+                if (op == 'I') {
+                    int u, v, w;
+                    infile >> u;
+                    infile >> v;
+                    infile >> w;
+                    flightmap.insert(u, v, w);
+                }
+                else if (op == 'L') {
+                    int u;
+                    infile >> u;
+                    flightmap.list(u);
+                }
+                else if (op == 'S') {
+                    int s, t;
+                    infile >> s;
+                    infile >> t;
+                }
+            }
 
-    list.display();
+
+
+        }
+    }
+    
 
     return 0;
 }
