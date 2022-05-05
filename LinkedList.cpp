@@ -52,6 +52,10 @@ bool LinkedList::insert(int dest, int dur) {
     }
 
     Node* cur = head;
+    newPtr->next = head;
+    head = newPtr;
+    return true;
+    /*
     for (int index = 1; index < size; ++index) {
         if (cur->destination > newPtr->destination || 
             (cur->destination == newPtr->destination && cur->duration > newPtr->duration)) {
@@ -72,8 +76,7 @@ bool LinkedList::insert(int dest, int dur) {
         }
         cur = cur->next;
     }
-
-    return false;
+    return false;*/
 }
 
 bool LinkedList::remove(int dest, int dur) {
