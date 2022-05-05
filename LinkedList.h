@@ -9,15 +9,15 @@ class LinkedList {
 
     bool isEmpty() const;
     int getLength() const;
-    bool retrieve(int index, char dest, int dur) const;
-    bool insert(char dest, int dur);
-    bool remove(char dest, int dur);
+    bool retrieve(int index, int dest, int dur) const;
+    bool insert(int dest, int dur);
+    bool remove(int dest, int dur);
     void display();
 
     private:
 
     struct Node{
-        char destination;
+        int destination;
         int duration;
         Node *next;
     }; 
