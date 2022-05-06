@@ -41,11 +41,12 @@ int main(int argc, char* argv[]) {
                     int s, t;
                     infile >> s;
                     infile >> t;
+                    flightmap.shortestPath(s, t);
+                }
+                else if (op == 'M') {
+                    flightmap.minimizeCosts();
                 }
             }
-
-
-
         }
     }
     

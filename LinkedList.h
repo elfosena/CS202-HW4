@@ -9,10 +9,13 @@ class LinkedList {
 
     bool isEmpty() const;
     int getLength() const;
+    int getMinDuration() const;
+    int getMinDest();
     bool retrieve(int index, int& dest, int& dur) const;
     bool insert(int dest, int dur);
     bool remove(int dest, int dur);
     void display();
+    int getDuration(int dest);
 
     private:
 
