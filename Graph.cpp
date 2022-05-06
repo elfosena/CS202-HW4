@@ -15,7 +15,7 @@ bool Graph::insert(int u, int v, int w) {
         lists[v].insert(u, w);
         
         cout << "Inserted a new flight between " << u << " and " << v << "." << endl;
-        cout << "The number of flights from " << u << " is " << lists[u].getLength() << "." << endl;
+        cout << "   " << "The number of flights from " << u << " is " << lists[u].getLength() << "." << endl;
         return true;
     }
     return false;
@@ -33,7 +33,7 @@ void Graph::list(int u) {
             int duration;
 
             lists[u].retrieve(i, destination, duration);
-            cout << u << " to " << destination << " with a duration of " << duration << "." << endl;
+            cout << "   " << u << " to " << destination << " with a duration of " << duration << "." << endl;
         }
 
         cout << "The number of flights is " << lists[u].getLength() << "." << endl;
@@ -47,10 +47,16 @@ void Graph::shortestPath(int s, int t) {
     int dest;
     int dur;
 
+    for (int i = 0; i < size; i++) {
+        duration[i] = 0;
+        visited[i] = 0;
+        prev[i] = 0;
+    }
+
     // Step 1
     visited[s] = 1;
     for (int i = 0; i < size; i++) {
-        duration[i] = INT32_MAX;
+        duration[i] = 2147483647;
         for (int j = 1; j <= lists[s].getLength(); j++) {
             lists[s].retrieve(j, dest, dur);
             if (dest == i) {
@@ -84,7 +90,7 @@ void Graph::shortestPath(int s, int t) {
 
     // Print Result
 
-    if (duration[t] == INT32_MAX) {
+    if (duration[t] == 2147483647) {
         cout << "No paths from " << s << " to " << t << endl;
     }
     else {
@@ -98,6 +104,10 @@ void Graph::shortestPath(int s, int t) {
         cout << result;
         cout << "Total flight duration of path: " << duration[t] << endl;
     }
+
+    delete [] duration;
+    delete [] visited;
+    delete [] prev;
 }
 
 void Graph::minimizeCosts() {
@@ -106,7 +116,11 @@ void Graph::minimizeCosts() {
     LinkedList* spanningtree = new LinkedList[size];
     int* visited = new int[size];
     int visitcount = 0;
-
+    
+    for (int i = 0; i < size; i++) {
+        visited[i] = 0;
+    }
+    
     visited[0] = 1;
     
     while (visitcount < size) {
@@ -129,6 +143,7 @@ void Graph::minimizeCosts() {
     }
 
     delete [] lists;
+    delete [] visited;
     lists = spanningtree;
     cout << "Total cost of operations after minimization: " << getTotalCost() << endl;
 
