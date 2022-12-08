@@ -125,7 +125,7 @@ void Graph::minimizeCosts() {
     LinkedList* spanningtree = new LinkedList[size];
     int* visited = new int[size];
     int visitcount = 0;
-    v
+    
     for (int i = 0; i < size; i++) {
         visited[i] = 0;
     }
